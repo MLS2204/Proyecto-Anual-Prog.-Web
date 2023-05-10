@@ -5,10 +5,9 @@ import {Link, useNavigate} from "react-router-don";
 import {useAuth} from ".../context/AuthContext";
 import {Alert} from "./Alert";
 
-AppRegistry.registerComponent(appName ()=> App);
-
 function App() {
   return (
+          <>
           <AuthProvider>
             <Routes>
                 <Route path="/login" element={<Login/>}/>
@@ -44,6 +43,7 @@ function App() {
         </a>
       </header>
     </div>
+    </>
   );
 }
 
