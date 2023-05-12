@@ -7,27 +7,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   
 }
-
-css(css-ruleorselectorexpected)
-
-<script css(css-lcurlyexpected) type="module">{
-  css(css-lcurlyexpected)
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyCuBCVQyn3w_VrKnfIteuk_AwwLQXPqWhI",
-    authDomain: "developers-e3595.firebaseapp.com",
-    projectId: "developers-e3595",
-    storageBucket: "developers-e3595.appspot.com",
-    messagingSenderId: "267490011169",
-    appId: "1:267490011169:web:114b6716ae0fe476259b60",
-    measurementId: "G-SJ0VR23DRB"
-  };
-  
-  const app = initializeApp(firebaseConfig)
-  const analytics = getAnalytics(app);
-}
-</script>
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
