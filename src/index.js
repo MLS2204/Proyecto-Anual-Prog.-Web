@@ -16,4 +16,14 @@ root.render(
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
 
+document.getElementById("loginForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  var email = document.getElementById("email").value;
+  var password = document.getElementById("password").value;
+
+  window.location.href = "developers/App.js";
+
+  document.getElementById("mensaje").innerHTML = "Inicio de sesión exitoso!";
+});
 
