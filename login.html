@@ -26,6 +26,52 @@
 
     // Inicializa Firebase
     firebase.initializeApp(firebaseConfig);
+    // Función para manejar el inicio de sesión
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+
+        // Iniciar sesión con Firebase
+        firebase.auth().signInWithEmailAndPassword(username, password)
+            .then(function(userCredential) {
+                // El inicio de sesión fue exitoso
+                var user = userCredential.user;
+                console.log('Inicio de sesión exitoso', user);
+                // Realizar acciones adicionales después del inicio de sesión
+            })
+            .catch(function(error) {
+                // Ocurrió un error durante el inicio de sesión
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                console.error(errorCode, errorMessage);
+                // Manejar el error del inicio de sesión aquí
+            });
+    });
+    // Verificar si el nombre de usuario existe en la base de datos
+    var usersRef = database.ref('users');
+        usersRef.orderByChild('username').equalTo(username).once('value', function(snapshot) {
+            if (snapshot.exists()) {
+                // El nombre de usuario existe en la base de datos, procede con el inicio de sesión
+                firebase.auth().signInWithEmailAndPassword(username, password)
+                    .then(function(userCredential) {
+                        var user = userCredential.user;
+                        console.log('Inicio de sesión exitoso', user);
+                        // Realizar acciones adicionales después del inicio de sesión
+                    })
+                    .catch(function(error) {
+                        var errorCode = error.code;
+                        var errorMessage = error.message;
+                        console.error(errorCode, errorMessage);
+                        // Manejar el error del inicio de sesión aquí
+                    });
+            } else {
+                console.error('El nombre de usuario no existe');
+                // Mensaje de error o acción específica cuando el nombre de usuario no existe
+            }
+        });
+        // Ejecutar la función init() cuando el DOM haya terminado de cargar
+        document.addEventListener('DOMContentLoaded', init);
     </script>
     <style>
         body {
@@ -85,7 +131,7 @@
         </div>
         <div class="input-group">
             <label for="password">Su contraseña: </label>
-            <input type="password" id="password" name="password" required maxlength="8" style="width: 200px;">
+            <input type="password" id="password" name="password"  style="width: 200px;">
         </div>
         <div class="input-group">
             <button type="submit">Iniciar Sesión</button>
