@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,14 +38,12 @@
                 // El inicio de sesión fue exitoso
                 var user = userCredential.user;
                 console.log('Inicio de sesión exitoso', user);
-                // Realizar acciones adicionales después del inicio de sesión
             })
             .catch(function(error) {
                 // Ocurrió un error durante el inicio de sesión
                 var errorCode = error.code;
                 var errorMessage = error.message;
                 console.error(errorCode, errorMessage);
-                // Manejar el error del inicio de sesión aquí
             });
     });
     // Verificar si el nombre de usuario existe en la base de datos
@@ -57,13 +55,11 @@
                     .then(function(userCredential) {
                         var user = userCredential.user;
                         console.log('Inicio de sesión exitoso', user);
-                        // Realizar acciones adicionales después del inicio de sesión
                     })
                     .catch(function(error) {
                         var errorCode = error.code;
                         var errorMessage = error.message;
                         console.error(errorCode, errorMessage);
-                        // Manejar el error del inicio de sesión aquí
                     });
             } else {
                 console.error('El nombre de usuario no existe');
