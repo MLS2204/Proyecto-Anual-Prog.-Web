@@ -1,78 +1,41 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienvenido</title>
-    <script>
-    import React, { useState } from "react";
-    function FromsFirebase(){
-        const [emailRegister, setEmailRegister] = useState("")
-        const [passwordRegister, setPasswordRegister] = useState("")
+/**
+ * @format
+ */
+
+import {AppRegistry} from 'react-native';
+import App from './App';
+import {name as appName} from './app.json';
+import {useAuth} from "./AuthContext.jsx"
+import { useState } from 'react';
+
+AppRegistry.registerComponent(appName, () => App);
+function FromsFirebase(){
+    const auth = useAuth()
+    const [emailRegister, setEmailRegister] = useState("")
+    const [passwordRegister, setPasswordRegister] = useState("")
+    
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const handleRegister = (e) => {
+        e.preventDefault()
+        auth.register(emailRegister, passwordRegister)
     }
-    </script>
-    <style>
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .container {
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-            width: 300px;
-        }
-
-        .input-group {
-            margin-bottom: 20px;
-        }
-
-        .input-group label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .input-group input {
-            width: 100%;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-
-        .input-group button {
-            width: 100%;
-            padding: 10px;
-            border-radius: 5px;
-            background-color: #4caf50;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-        }
-    </style>
-</head>
-<body> 
-    <div class="container">
+    return (
+      <div class="container">
+       <form className="form">
         <h1>¿Quien eres?</h1>
         <h3>Inicia Sesión</h3>
         <div class="input-group">
             <label for="username">Nombre de usuario: </label>
-            <input type="text" id="username" name="username" required style="width: 280px;">
+            <input onChange={(e)=>setEmail(e.target.value)} className='input' type="email" id="username" name="username" required style="width: 280px;" />
         </div>
         <div class="input-group">
             <label for="password">Su contraseña: </label>
-            <input type="password" id="password" name="password"  style="width: 200px;">
+            <input onChange={(e)=> setPassword(e.target.value)} type="password" id="password" name="password"  style="width: 200px;"/>
         </div>
+       </form>
         <div class="input-group">
-            <button type="submit">Iniciar Sesión</button>
+            <button onClick={()=>handleRegister()} className='button' type="submit">Iniciar Sesión</button>
         </div>
         <div>
             <a href="https://accounts.google.com/v3/signin/identifier?continue=https%3A%2F%2Fwww.google.com.ar%2F&ec=GAZAmgQ&hl=es-419&ifkv=AVQVeyw4-X2o_1LHi1YiT8E809xlrDpN4557TaZ23OYO6uhpqsfY5UZppirSWLl8Bx2NVxlFL4JUrQ&passive=true&flowName=GlifWebSignIn&flowEntry=ServiceLogin&dsh=S973283765%3A1700081806900886&theme=glif">
@@ -91,6 +54,6 @@
                 </svg>
             </a>
         </div>
-    </div>
-</body>
-</html>
+      </div>
+    );
+}
